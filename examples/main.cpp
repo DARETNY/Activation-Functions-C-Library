@@ -11,7 +11,7 @@ int main()
 {
     IC_CONFIG.prefix("\033[32m", "ic| ", "\033[0m");
 
-    ActivationFunctionFactory::Type function = ActivationFunctionFactory::Type::SIGMOID;
+    ActivationFunctionFactory::Type function = ActivationFunctionFactory::Type::LEAKY_RELU;
     unique_ptr<IActivationFunction> activation = ActivationFunctionFactory::createActivation(function);
     IC(activation->getName());
     cout << "--------------------------------------------------------" << endl;

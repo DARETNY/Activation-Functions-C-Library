@@ -8,6 +8,10 @@
 #include "../functions/sigmoid.h"
 #include "../functions/tanh.h"
 #include "../functions/softmax.h"
+#include "../functions/elu.h"
+#include "../functions/leaky_relu.h"
+#include "../functions/selu.h"
+#include "../functions/swish.h"
 
 using namespace std;
 
@@ -18,7 +22,9 @@ struct ActivationFunctionFactory {
         RELU,
         SIGMOID,
         TANH,
-        SOFTMAX
+        LEAKY_RELU,
+        SWISH,
+        SELU_TYPE
     };
 
     static unique_ptr<IActivationFunction> createActivation(Type type) {
@@ -26,15 +32,15 @@ struct ActivationFunctionFactory {
             case RELU:    return unique_ptr<IActivationFunction>(new ReLU());
             case SIGMOID: return unique_ptr<IActivationFunction>(new Sigmoid());
             case TANH:    return unique_ptr<IActivationFunction>(new Tanh());
-            default:      return unique_ptr<IActivationFunction>(new ReLU());
+            case LEAKY_RELU: return unique_ptr<IActivationFunction>(new LeakyReLU());
+            case SWISH:   return unique_ptr<IActivationFunction>(new Swish());
+            case SELU_TYPE: return unique_ptr<IActivationFunction>(new SELU());
+            default:      throw std::runtime_error("Invalid activation function type: No activation function was chosen");
         }
     }
 
-    static unique_ptr<IVectorActivationFunction> createVectorActivation(Type type) {
-        if (type == SOFTMAX) {
-            return unique_ptr<IVectorActivationFunction>(new Softmax());
-        }
-        return nullptr;
+    static unique_ptr<IVectorActivationFunction> createVectorActivation() {
+        return unique_ptr<IVectorActivationFunction>(new Softmax());
     }
 };
 
