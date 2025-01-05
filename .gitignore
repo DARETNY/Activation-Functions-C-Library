@@ -1,1 +1,32 @@
- 
+# Build dizinleri
+build/
+out/
+cmake-build-*/
+
+# IDE dosyaları
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Derlenmiş dosyalar
+*.o
+*.obj
+*.exe
+*.out
+*.app
+*.dll
+*.so
+*.dylib
+
+# CMake tarafından oluşturulan dosyalar
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Proje özel çalıştırılabilir dosyalar
+activation_example
+
+# Debug dosyaları
+*.dSYM/ 
