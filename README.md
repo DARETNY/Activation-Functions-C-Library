@@ -95,20 +95,23 @@ This library provides commonly used activation functions in a modular and extens
 ## 🚀 Quick Start
 
 ```cpp
-#include "activation/factory/activation_factory.h"
 
-using namespace activation;
+    ActivationFunctionFactory::Type function = ActivationFunctionFactory::Type::SIGMOID;
+    unique_ptr<IActivationFunction> activation = ActivationFunctionFactory::createActivation(function);
+    IC(activation->getName());
+    cout << "--------------------------------------------------------" << endl;
+    // Test farklı değerler için
+    vector<double> test_values = {-2.0, -1.0, -0.5, 0.0, 0.5, 1.0, 2.0};
+    for (const auto &val : test_values)
+    {
+        IC(val, activation->compute(val));
+    }
 
-int main() {
-    // Create activation function
-    auto activation = ActivationFunctionFactory::createActivation(
-        ActivationFunctionFactory::Type::SIGMOID);
-    
-    // Use the function
-    double result = activation->compute(1.0);
-    return 0;
-}
 ```
+## Sample Output 
+![image](https://github.com/user-attachments/assets/965229bd-6526-4774-8f0a-130ad1ebe8ac)
+
+
 
 ## 📦 Installation
 
